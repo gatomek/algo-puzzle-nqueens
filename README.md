@@ -32,8 +32,8 @@ Example of one sequence [0, 6, 4, 7, 1, 3, 5, 2] from the solution of the board 
 
 
 ### Project details:
-- Project: C++ cmake
-- Tests: Boost.Test
+- Project: cmake 3.16.0-rc1
+- Tests: Boost.Test 1.71
 - C++ Standard Compliance: C++17
 - C++11: explicitly deleted constructors and operator, placeholder type specifier (auto)
 - C++14: initializing variables using braces
