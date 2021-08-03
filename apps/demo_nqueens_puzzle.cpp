@@ -35,7 +35,7 @@ int main()
     puzzle.Solve( solutions);
 
     cout << "Solutions: " << endl;
-    for( const vector<unsigned int>& s : solutions)
+    for( const auto& s : solutions)
         cout << s << endl;
     cout << "Count: " << solutions.size() << endl;
 }
