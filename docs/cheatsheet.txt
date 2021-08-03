@@ -1,0 +1,2 @@
+# MS Windows / MS Visual Studio 2017
+cmake -S {project_folder} -B {build_folder} -G "Visual Studio 15 2017"
