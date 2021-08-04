@@ -26,25 +26,23 @@ namespace puzzles
         board[ row][ col] = false;
     }
 
-    bool NQueensPuzzle::CheckBeating( const vector<vector<bool>>& board, unsigned int r, unsigned int c, unsigned int queens) const
+    bool NQueensPuzzle::CheckBeating( const vector<vector<bool>>& board, unsigned int r, unsigned int c) const
     {
-        if( queens == 0)
-            return true;
-
-        const unsigned int size { m_Size };
-
         for( unsigned int row { 0 }; row < r; row ++)
+        {
+            const unsigned int size { m_Size };
             for( unsigned int col { 0 }; col < size; col ++)
                 if( board[ row][ col])
                 {
                     if( c == col)
                         return false;
 
-                    const unsigned int deltaW = max( r, row) - min( r, row);
-                    const unsigned int deltaK = max( c, col) - min( c, col);
-                    if( deltaW == deltaK)
+                    const unsigned int deltaRow = max( r, row) - min( r, row);
+                    const unsigned int deltaCol = max( c, col) - min( c, col);
+                    if( deltaRow == deltaCol)
                         return false;
                 }
+        }
 
         return true;
     }
@@ -68,7 +66,7 @@ namespace puzzles
         {
             assert( CheckInsertion( board, row, col));
 
-            if( CheckBeating( board, row, col, queens))
+            if( CheckBeating( board, row, col))
             {
                 InsertQueen( board, row, col);
                 queens ++;

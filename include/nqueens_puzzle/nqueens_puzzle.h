@@ -24,7 +24,7 @@ namespace puzzles
 
     private:
         bool CheckInsertion( const vector<vector<bool>>& board, unsigned int row, unsigned int col) const;
-        bool CheckBeating( const vector<vector<bool>>& board, unsigned int r, unsigned int c, unsigned int queens) const;
+        bool CheckBeating( const vector<vector<bool>>& board, unsigned int r, unsigned int c) const;
 
     private:
         void InsertQueen( vector<vector<bool>>& board, unsigned int row, unsigned int col);
