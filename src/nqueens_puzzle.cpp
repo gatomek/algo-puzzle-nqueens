@@ -31,15 +31,12 @@ namespace puzzles
         if( queens == 0)
             return true;
 
-        unsigned int counter { 0 };
         const unsigned int size { m_Size };
 
-        for( unsigned int row { 0 }; row < size; row ++)
+        for( unsigned int row { 0 }; row < r; row ++)
             for( unsigned int col { 0 }; col < size; col ++)
                 if( board[ row][ col])
                 {
-                    assert( r > row);
-
                     if( c == col)
                         return false;
 
@@ -47,10 +44,6 @@ namespace puzzles
                     const unsigned int deltaK = max( c, col) - min( c, col);
                     if( deltaW == deltaK)
                         return false;
-
-                    counter ++;
-                    if( counter == queens)
-                        break;
                 }
 
         return true;
@@ -78,26 +71,27 @@ namespace puzzles
             if( CheckBeating( board, row, col, queens))
             {
                 InsertQueen( board, row, col);
+                queens ++;
 
-                const unsigned int currQueens { queens + 1 };
-
-                if( currQueens == size)
+                if( queens == size)
                 {
-                    vector<unsigned int> solution( size, -1);
+                    vector<unsigned int> solution;
+                    solutions.reserve( size);
 
-                    for( unsigned int r { 0 }; r < size; r ++)
-                        for( unsigned int c { 0 }; c < size; c ++)
+                    for( unsigned int c { 0 }; c < size; c ++)
+                        for( unsigned int r { 0 }; r < size; r ++)
                             if( board[ r][ c])
-                                solution[ c] = r;
+                                solution.push_back( r);
 
                     solutions.push_back( solution);
                 }
                 else if( row + 1 < size)
                 {
-                    Run( board, row + 1, currQueens, solutions);
+                    Run( board, row + 1, queens, solutions);
                 }
 
                 DeleteQueen( board, row, col);
+                queens --;
             }
         }
     }

@@ -42,6 +42,9 @@ Example of one sequence [0, 6, 4, 7, 1, 3, 5, 2] from the solution of the board 
 - usage approach described in book "algorithms + data structures = programs" without board as a bool matrix
 
 ### Technical backlog
+- migration to cmake 3.21
+- migration to Boost 1.76
+- adding alternative C++ Google Test 1.11
 - compilation with clang, g++
 - static code analyzes by SonarCloud, clang-tidy, cpp-check
 - validating against MISRA coding standard
