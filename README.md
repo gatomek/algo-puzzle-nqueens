@@ -27,7 +27,7 @@ Example of one sequence [0, 6, 4, 7, 1, 3, 5, 2] from the solution of the board 
 
 
 ### Complexities
-- Time complexity: O( n!)  
+- Time complexity: O( n!) / O (n^2) 
 - Memory complexity: O( n*n)
 
 
