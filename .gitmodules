@@ -1,0 +1,3 @@
+[submodule "extern/trie"]
+	path = extern/trie
+	url = https://github.com/gatomek/kata_trie.git

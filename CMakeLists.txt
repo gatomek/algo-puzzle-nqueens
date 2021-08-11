@@ -18,10 +18,11 @@ SET( UBTS OFF CACHE STRING "Use BOOST.TEST tests ?" )
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
+add_subdirectory("${PROJECT_SOURCE_DIR}/extern/trie"  "extern/trie")
 add_subdirectory (src)
-
+	
 if( CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
-    add_subdirectory (apps)
+	add_subdirectory (apps)
 	
 	if( UBTS)
         find_package (Boost REQUIRED)

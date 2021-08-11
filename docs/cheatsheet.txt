@@ -1,2 +1,5 @@
 # MS Windows / MS Visual Studio 2017
 cmake -S {project_folder} -B {build_folder} -G "Visual Studio 15 2017"
+
+# Adding subrepo
+git submodule add https://github.com/gatomek/kata_trie.git extern/trie

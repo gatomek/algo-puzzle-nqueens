@@ -37,6 +37,8 @@ Example of one sequence [0, 6, 4, 7, 1, 3, 5, 2] from the solution of the board 
 - C++ Standard Compliance: C++17
 - C++11: explicitly deleted constructors and operator, placeholder type specifier (auto)
 - C++14: initializing variables using braces
+- project contains sub-project kata_trie for testing purpose
+- project tests limited only to main project n-queens puzzle
 
 ### Functional Backlog:
 - usage approach described in book "algorithms + data structures = programs" without board as a bool matrix
