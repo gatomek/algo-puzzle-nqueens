@@ -5,10 +5,61 @@
 #include "nqueens_puzzle/nqueens_puzzle.h"
 #include "kata/trie.h"
 
-
 namespace but = boost::unit_test;
 using namespace puzzles;
 using namespace std;
+
+bool CheckDuplicates( vector<vector<unsigned int>>& solutions)
+{
+    kata::Trie<unsigned int> trie;
+    for( auto s : solutions)
+    {
+        if( trie.Find( s))
+            return true;
+
+        trie.Insert( s);
+    }
+
+    return false;
+}
+
+bool CheckBeating( vector<vector<unsigned int>>& solutions)
+{
+    if( solutions.size() == 0)
+        return false;
+
+    const unsigned int size = solutions[0].size();
+
+    for( auto s : solutions)
+    {
+        vector<pair<unsigned int, unsigned int>> positions;
+        for( unsigned int i = 0; i < size; i ++)
+            positions.push_back( {s[i], i});
+
+        for( unsigned int i = 0; i < size; i ++)
+        {
+            const auto queen = positions[i];
+
+            for( unsigned int k = i + 1; k < size; k ++)
+            {
+                const auto next = positions[ k];
+
+                if( queen.first == next.first)
+                    return true;
+
+                if( queen.second == next.second)
+                    return true;
+
+                unsigned int deltaRow = max( queen.first, next.first) - min( queen.first, next.first);
+                unsigned int deltaCol = max( queen.second, next.second) - min( queen.second, next.second);
+                if( deltaRow == deltaCol)
+                    return true;
+            }
+        }
+    }
+
+    return false;
+}
 
 BOOST_AUTO_TEST_CASE( OneQueenTest)
 {
@@ -19,6 +70,7 @@ BOOST_AUTO_TEST_CASE( OneQueenTest)
 
     BOOST_TEST( solutions.size() == 1);
     BOOST_TEST( solutions[0].size() == 1);
+    BOOST_TEST( ! CheckBeating( solutions));
 }
 
 BOOST_AUTO_TEST_CASE( TwoQueenTest)
@@ -50,13 +102,8 @@ BOOST_AUTO_TEST_CASE( FourQueenTest)
 
     BOOST_TEST( solutions.size() == 2);
     BOOST_TEST( solutions[0].size() == 4);
-
-    kata::Trie<unsigned int> trie;
-    for( auto s : solutions)
-    {
-        BOOST_TEST( trie.Find( s) == false);
-        trie.Insert( s);
-    }
+    BOOST_TEST( ! CheckDuplicates( solutions) );
+    BOOST_TEST( ! CheckBeating( solutions));
 }
 
 BOOST_AUTO_TEST_CASE( FiveQueenTest)
@@ -68,13 +115,8 @@ BOOST_AUTO_TEST_CASE( FiveQueenTest)
 
     BOOST_TEST( solutions.size() == 10);
     BOOST_TEST( solutions[0].size() == 5);
-
-    kata::Trie<unsigned int> trie;
-    for( auto s : solutions)
-    {
-        BOOST_TEST( trie.Find( s) == false);
-        trie.Insert( s);
-    }
+    BOOST_TEST( ! CheckDuplicates( solutions) );
+    BOOST_TEST( ! CheckBeating( solutions));
 }
 
 BOOST_AUTO_TEST_CASE( SixQueenTest)
@@ -86,13 +128,8 @@ BOOST_AUTO_TEST_CASE( SixQueenTest)
 
     BOOST_TEST( solutions.size() == 4);
     BOOST_TEST( solutions[0].size() == 6);
-
-    kata::Trie<unsigned int> trie;
-    for( auto s : solutions)
-    {
-        BOOST_TEST( trie.Find( s) == false);
-        trie.Insert( s);
-    }
+    BOOST_TEST( ! CheckDuplicates( solutions) );
+    BOOST_TEST( ! CheckBeating( solutions));
 }
 
 BOOST_AUTO_TEST_CASE( SevenQueenTest)
@@ -104,13 +141,8 @@ BOOST_AUTO_TEST_CASE( SevenQueenTest)
 
     BOOST_TEST( solutions.size() == 40);
     BOOST_TEST( solutions[0].size() == 7);
-
-    kata::Trie<unsigned int> trie;
-    for( auto s : solutions)
-    {
-        BOOST_TEST( trie.Find( s) == false);
-        trie.Insert( s);
-    }
+    BOOST_TEST( ! CheckDuplicates( solutions) );
+    BOOST_TEST( ! CheckBeating( solutions));
 }
 
 BOOST_AUTO_TEST_CASE( EigthQueenTest)
@@ -122,13 +154,8 @@ BOOST_AUTO_TEST_CASE( EigthQueenTest)
 
     BOOST_TEST( solutions.size() == 92);
     BOOST_TEST( solutions[0].size() == 8);
-
-    kata::Trie<unsigned int> trie;
-    for( auto s : solutions)
-    {
-        BOOST_TEST( trie.Find( s) == false);
-        trie.Insert( s);
-    }
+    BOOST_TEST( ! CheckDuplicates( solutions) );
+    BOOST_TEST( ! CheckBeating( solutions));
 }
 
 BOOST_AUTO_TEST_CASE( NineQueenTest)
@@ -140,12 +167,7 @@ BOOST_AUTO_TEST_CASE( NineQueenTest)
 
     BOOST_TEST( solutions.size() == 352);
     BOOST_TEST( solutions[0].size() == 9);
-
-    kata::Trie<unsigned int> trie;
-    for( auto s : solutions)
-    {
-        BOOST_TEST( trie.Find( s) == false);
-        trie.Insert( s);
-    }
+    BOOST_TEST( ! CheckDuplicates( solutions) );
+    BOOST_TEST( ! CheckBeating( solutions));
 }
 
